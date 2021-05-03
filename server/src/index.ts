@@ -1,14 +1,15 @@
-
 import { ApolloServer } from 'apollo-server'
-import { typeDefs } from '../schema'
+import { typeDefs } from './schema'
 import { resolvers } from './resolvers'
-// import { todosRepo } from './modules/todos/repos';
-// import { TodoRepo } from './modules/todos/repos/todoRepo';
+import { taskRepo } from './modules/tasks/repos';
+import { ITaskRepo } from './modules/tasks/repos/taskRepo';
 
-//export type Context = { todosRepo: TodoRepo }
+
+export type Context = { taskRepo: ITaskRepo }
+
 
 const server = new ApolloServer({
-  //context: () => ({ todosRepo } as Context),
+  context: () => ({ taskRepo } as Context),
   typeDefs,
   resolvers
 });
