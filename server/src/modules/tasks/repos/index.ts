@@ -1,5 +1,5 @@
-import { InMemoryTaskRepo } from "./implementations/inmemoryTaskRepo";
+import { MongoDBTaskRepo } from "./implementations/mongoDBTaskRepo";
 
-const taskRepo = new InMemoryTaskRepo();
+const taskRepo = new MongoDBTaskRepo();
 
 export {taskRepo};

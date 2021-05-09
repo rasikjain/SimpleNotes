@@ -2,7 +2,7 @@ import { Task, TaskDbObject } from "../../../../generated/graphql";
 import { ITaskRepo } from "../taskRepo";
 
 
-export class InMemoryTaskRepo implements ITaskRepo {
+export class MongoDBTaskRepo implements ITaskRepo {
 
     private tasks: Task[] = [
         {
