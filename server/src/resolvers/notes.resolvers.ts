@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Query } from 'type-graphql';
+import { Resolver, Mutation, Arg, Query, ID } from 'type-graphql';
 import { NotesModel, Notes } from '../models/notes.model';
 import { NotesInput } from './types/notes-input';
 
@@ -42,7 +42,7 @@ export class NotesResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteNotes(@Arg('id') id: string): Promise<Boolean> {
+  async deleteNotes(@Arg('id') id: ): Promise<Boolean> {
     await NotesModel.deleteOne({ _id: id });
     return true;
   }
