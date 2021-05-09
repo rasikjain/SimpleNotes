@@ -6,7 +6,7 @@
 type Mutation {
   createNotes(newNotesInput: NotesInput!): Notes!
   deleteNotes(id: String!): Boolean!
-  updateNotes(newNotesInput: NotesInput!): Notes!
+  updateNotes(editNotesInput: NotesInput!): Notes!
 }
 
 """The Notes Model"""
