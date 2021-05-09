@@ -42,7 +42,7 @@ export class NotesResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteNotes(@Arg('id') id: ): Promise<Boolean> {
+  async deleteNotes(@Arg('id') id: string): Promise<Boolean> {
     await NotesModel.deleteOne({ _id: id });
     return true;
   }

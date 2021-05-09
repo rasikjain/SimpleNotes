@@ -4,11 +4,10 @@ import { Field, ObjectType, ID } from 'type-graphql';
 @ObjectType({ description: 'The Notes Model' })
 @modelOptions({ schemaOptions: { collection: 'notes', timestamps: true } })
 export class Notes {
-  @Field()
+  @Field(() => ID)
   id: string;
 
   @Field()
-  // Mongoose validation goes inside the @Props arguments
   @Property({ type: () => String, required: true })
   public title: string;
 

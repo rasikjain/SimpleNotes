@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rasik Jain",
   "license": "ISC",
   "dependencies": {
     "@typegoose/typegoose": "^7.6.0",

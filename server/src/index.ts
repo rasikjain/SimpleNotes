@@ -21,6 +21,7 @@ const executeMain = async () => {
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.m2bu1.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
+
   await mongoose.connection;
 
   const server = new ApolloServer({ schema: schema });

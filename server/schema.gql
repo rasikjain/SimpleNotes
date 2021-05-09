@@ -13,14 +13,14 @@ type Mutation {
 type Notes {
   backgroundColor: String
   description: String!
-  id: String!
+  id: ID!
   title: String!
 }
 
 input NotesInput {
   backgroundColor: String
   description: String!
-  id: String
+  id: ID
   title: String!
 }
 

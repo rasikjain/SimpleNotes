@@ -1,8 +1,8 @@
-import { Field, InputType } from 'type-graphql';
+import { Field, InputType, ID } from 'type-graphql';
 import { Notes } from '../../models/notes.model';
 @InputType()
 export class NotesInput implements Partial<Notes> {
-  @Field({ nullable: true })
+  @Field(() => ID, { nullable: true })
   id: string;
 
   @Field()
