@@ -11,12 +11,14 @@ type Mutation {
 
 """The Notes Model"""
 type Notes {
+  backgroundColor: String
   description: String!
   id: String!
   title: String!
 }
 
 input NotesInput {
+  backgroundColor: String
   description: String!
   id: String
   title: String!
