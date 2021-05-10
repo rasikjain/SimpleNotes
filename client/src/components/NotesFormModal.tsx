@@ -20,7 +20,7 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
   };
 
   return (
-    <Modal show={props.showModal} onHide={props.closeModal}>
+    <Modal show={props.showModal} onHide={props.closeModal} size="lg">
       <Modal.Header>
         <Modal.Title>Create New Notes</Modal.Title>
       </Modal.Header>
@@ -33,7 +33,7 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
 
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea className="form-control" rows={3} id="description" placeholder="Enter text here..."></textarea>
+            <textarea className="form-control" rows={8} id="description" placeholder="Enter text here..."></textarea>
           </div>
         </form>
       </Modal.Body>
