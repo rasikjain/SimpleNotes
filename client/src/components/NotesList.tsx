@@ -32,7 +32,7 @@ export const NotesList = () => {
   return (
     <div className="row">
       {data?.getAllNotes.map((notesItem: Notes) => (
-        <div className="col-lg-4 mb-3" key={notesItem.id}>
+        <div className="col-sm-6 mb-3 rounded-lg" key={notesItem.id}>
           <NotesItem {...notesItem}></NotesItem>
         </div>
       ))}

@@ -28,12 +28,13 @@ export class NotesResolver {
   }
 
   @Mutation(() => Notes)
-  async updateNotes(@Arg('editNotesInput') { id, title, description }: NotesInput): Promise<Notes> {
+  async updateNotes(@Arg('editNotesInput') { id, title, description, backgroundColor }: NotesInput): Promise<Notes> {
     const notes = await NotesModel.findByIdAndUpdate(
       { _id: id },
       {
         title,
         description,
+        backgroundColor,
       },
       { new: true }
     );
