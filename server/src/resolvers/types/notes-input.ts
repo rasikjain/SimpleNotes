@@ -13,4 +13,7 @@ export class NotesInput implements Partial<Notes> {
 
   @Field({ nullable: true })
   backgroundColor: string;
+
+  @Field({ nullable: true })
+  isArchived: boolean;
 }

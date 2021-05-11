@@ -14,6 +14,7 @@ type Notes {
   backgroundColor: String
   description: String!
   id: ID!
+  isArchived: Boolean
   title: String!
 }
 
@@ -21,6 +22,7 @@ input NotesInput {
   backgroundColor: String
   description: String!
   id: ID
+  isArchived: Boolean
   title: String!
 }
 

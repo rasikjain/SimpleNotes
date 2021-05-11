@@ -4,37 +4,41 @@ import { NotesInput } from './types/notes-input';
 
 @Resolver((_of) => Notes)
 export class NotesResolver {
-  @Query((_returns) => Notes, { nullable: false })
+  @Query((_returns) => Notes, { nullable: false, name: 'getNotesById' })
   async getNotesById(@Arg('id') id: string) {
     return await NotesModel.findById({ _id: id });
   }
 
-  @Query(() => [Notes])
+  @Query(() => [Notes], { name: 'getAllNotes' })
   async getAllNotes() {
     return await NotesModel.find();
   }
 
-  @Mutation(() => Notes)
+  @Mutation(() => Notes, { name: 'createNotes' })
   async createNotes(@Arg('newNotesInput') { title, description, backgroundColor }: NotesInput): Promise<Notes> {
     const notes = (
       await NotesModel.create({
         title,
         description,
         backgroundColor,
+        isArchived: false,
       })
     ).save();
 
     return notes;
   }
 
-  @Mutation(() => Notes)
-  async updateNotes(@Arg('editNotesInput') { id, title, description, backgroundColor }: NotesInput): Promise<Notes> {
+  @Mutation(() => Notes, { name: 'updateNotes' })
+  async updateNotes(
+    @Arg('editNotesInput') { id, title, description, backgroundColor, isArchived }: NotesInput
+  ): Promise<Notes> {
     const notes = await NotesModel.findByIdAndUpdate(
       { _id: id },
       {
         title,
         description,
         backgroundColor,
+        isArchived,
       },
       { new: true }
     );
@@ -42,7 +46,7 @@ export class NotesResolver {
     return notes;
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => Boolean, { name: 'deleteNotes' })
   async deleteNotes(@Arg('id') id: string): Promise<Boolean> {
     await NotesModel.deleteOne({ _id: id });
     return true;

@@ -18,6 +18,10 @@ export class Notes {
   @Field({ nullable: true })
   @Property({ type: String, required: false })
   backgroundColor: string;
+
+  @Field({ nullable: true })
+  @Property({ type: Boolean, required: false })
+  isArchived: boolean;
 }
 
 export const NotesModel = getModelForClass(Notes);
