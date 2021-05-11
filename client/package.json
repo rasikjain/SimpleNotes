@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "download-schema": "apollo service:download --endpoint=http://localhost:3333/graphql graphql-schema.json",
+    "codegen": "npm run download-schema && apollo codegen:generate --localSchemaFile=graphql-schema.json --target=typescript --tagName=gql"
   },
   "eslintConfig": {
     "extends": [
