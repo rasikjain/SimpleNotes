@@ -4,7 +4,7 @@ import { Notes } from '../models/notes';
 import { NotesItem } from './NotesItem';
 import { getNotesList } from './__generated__/getNotesList';
 
-const GET_NOTES_LIST = gql`
+export const GET_NOTES_LIST = gql`
   query getNotesList {
     notesList {
       id
