@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { GET_NOTES_LIST } from './NotesList';
 import { createNotesMutationVariables, createNotesMutation_createNotes } from './__generated__/createNotesMutation';
@@ -8,6 +8,9 @@ import { CirclePicker, Color } from 'react-color';
 
 const Header = () => {
   const [isModalOpen, setModalOpenState] = useState(false);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [backgroundColor, setBackgroundColor] = useState<string>('');
 
   const openModal = () => {
     setModalOpenState(true);
@@ -73,23 +76,6 @@ const Header = () => {
     closeModal();
   };
 
-  const [title, setTitle] = useState<string>('');
-
-  const [description, setDescription] = useState<string>('');
-
-  const [backgroundColor, setBackgroundColor] = useState<string>('');
-
-  const handleTitleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-  const handleDescriptionInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value);
-  };
-
-  const handleColorChangeComplete = (hex: string) => {
-    setBackgroundColor(hex);
-  };
-
   return (
     <div>
       <div className="row py-2">
@@ -111,7 +97,7 @@ const Header = () => {
                   <label htmlFor="title">Title</label>
                   <input
                     type="text"
-                    onChange={handleTitleInput}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="form-control"
                     id="title"
                     placeholder="Title"
@@ -138,7 +124,7 @@ const Header = () => {
 
                     <CirclePicker
                       color={backgroundColor}
-                      onChangeComplete={(color) => handleColorChangeComplete(color.hex)}
+                      onChangeComplete={(color) => setBackgroundColor(color.hex)}
                       width="400px"
                       circleSize={20}
                       colors={[
