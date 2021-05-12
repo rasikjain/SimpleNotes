@@ -2,24 +2,22 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import { Notes } from '../models/notes';
 import { NotesItem } from './NotesItem';
-
-interface NotesQueryResponse {
-  getAllNotes: Notes[];
-}
+import { getNotesList } from './__generated__/getNotesList';
 
 const GET_NOTES_LIST = gql`
-  query {
-    getAllNotes {
+  query getNotesList {
+    notesList {
       id
       title
       description
       backgroundColor
+      isArchived
     }
   }
 `;
 
 export const NotesList = () => {
-  const { data, error, loading } = useQuery<NotesQueryResponse>(GET_NOTES_LIST);
+  const { data, error, loading } = useQuery<getNotesList>(GET_NOTES_LIST);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -31,7 +29,7 @@ export const NotesList = () => {
 
   return (
     <div className="row">
-      {data?.getAllNotes.map((notesItem: Notes) => (
+      {data?.notesList.map((notesItem: Notes) => (
         <div className="col-sm-6 mb-3 rounded-lg" key={notesItem.id}>
           <NotesItem {...notesItem}></NotesItem>
         </div>

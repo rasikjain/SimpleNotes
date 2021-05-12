@@ -27,6 +27,8 @@ input NotesInput {
 }
 
 type Query {
-  getAllNotes: [Notes!]!
-  getNotesById(id: String!): Notes!
+  notes(id: String!): Notes!
+
+  """Get List of Notes"""
+  notesList: [Notes!]!
 }

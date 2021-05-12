@@ -10,10 +10,12 @@ export interface NotesFormModalProps {
 export const NotesFormModal = (props: NotesFormModalProps) => {
   const createNotes = () => {
     const notesData: Notes = {
+      __typename: 'Notes',
       title: '',
       backgroundColor: '',
       description: '',
       id: '',
+      isArchived: null,
     };
 
     props.createNotes(notesData);

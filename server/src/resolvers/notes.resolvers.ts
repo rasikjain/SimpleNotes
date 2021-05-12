@@ -4,12 +4,12 @@ import { NotesInput } from './types/notes-input';
 
 @Resolver((_of) => Notes)
 export class NotesResolver {
-  @Query((_returns) => Notes, { nullable: false, name: 'getNotesById' })
+  @Query((_returns) => Notes, { nullable: false, name: 'notes' })
   async getNotesById(@Arg('id') id: string) {
     return await NotesModel.findById({ _id: id });
   }
 
-  @Query(() => [Notes], { name: 'getAllNotes' })
+  @Query(() => [Notes], { name: 'notesList', description: 'Get List of Notes' })
   async getAllNotes() {
     return await NotesModel.find();
   }
