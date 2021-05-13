@@ -46,9 +46,11 @@ export class NotesResolver {
     return notes;
   }
 
-  @Mutation(() => Boolean, { name: 'deleteNotes' })
-  async deleteNotes(@Arg('id') id: string): Promise<Boolean> {
-    await NotesModel.deleteOne({ _id: id });
-    return true;
+  @Mutation(() => String, { name: 'deleteNotes' })
+  async deleteNotes(@Arg('id') id: string): Promise<String> {
+    const result = await NotesModel.deleteOne({ _id: id });
+
+    if (result.ok == 1) return id;
+    else return '';
   }
 }

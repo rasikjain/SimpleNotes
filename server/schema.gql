@@ -5,7 +5,7 @@
 
 type Mutation {
   createNotes(newNotesInput: NotesInput!): Notes!
-  deleteNotes(id: String!): Boolean!
+  deleteNotes(id: String!): String!
   updateNotes(editNotesInput: NotesInput!): Notes!
 }
 

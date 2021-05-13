@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface deleteNotesMutation {
-  deleteNotes: boolean;
+  deleteNotes: string;
 }
 
 export interface deleteNotesMutationVariables {

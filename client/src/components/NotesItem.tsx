@@ -3,7 +3,7 @@ import { useDeleteNotes } from '../operations/mutations/deleteNotes';
 
 export const NotesItem = (notesDataItem: Notes) => {
   //DELETE NOTES MUTATE
-  const { deleteNotesMutate } = useDeleteNotes(notesDataItem.id);
+  const { deleteNotesMutate } = useDeleteNotes();
 
   const handleDelete = (id: string) => {
     deleteNotesMutate({
