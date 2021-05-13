@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { CirclePicker, Color } from 'react-color';
-import { GET_NOTES_LIST } from './NotesList';
+import { CirclePicker } from 'react-color';
 import { gql, useMutation } from '@apollo/client';
 import { createNotesMutationVariables, createNotesMutation_createNotes } from './__generated__/createNotesMutation';
-import { getNotesList } from './__generated__/getNotesList';
+import { getNotesList } from '../operations/queries/__generated__/getNotesList';
+import { GET_NOTES_LIST } from '../operations/queries/getNotesList';
 
 export interface NotesFormModalProps {
   showModal: boolean;

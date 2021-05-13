@@ -1,9 +1,8 @@
 import { gql, useMutation } from '@apollo/client';
-import React from 'react';
 import { Notes } from '../models/notes';
-import { GET_NOTES_LIST } from './NotesList';
+import { GET_NOTES_LIST } from '../operations/queries/getNotesList';
+import { getNotesList } from '../operations/queries/__generated__/getNotesList';
 import { deleteNotesMutationVariables } from './__generated__/deleteNotesMutation';
-import { getNotesList } from './__generated__/getNotesList';
 
 export const NotesItem = (notesDataItem: Notes) => {
   const DELETE_NOTES_MUTATION = gql`
@@ -21,7 +20,7 @@ export const NotesItem = (notesDataItem: Notes) => {
       optimisticResponse: true,
       update: (cache) => {
         const existingNotes: getNotesList = cache.readQuery({ query: GET_NOTES_LIST }) ?? { notesList: [] };
-        const updatedNotesList = existingNotes.notesList.filter((t) => t.id != id);
+        const updatedNotesList = existingNotes.notesList.filter((t) => t.id !== id);
         cache.writeQuery({
           query: GET_NOTES_LIST,
           data: {
@@ -32,14 +31,13 @@ export const NotesItem = (notesDataItem: Notes) => {
     });
   };
 
-  console.log(notesDataItem.description);
   return (
     <div>
       <div className="card" style={{ width: '30rem' }}>
         <div className="card-body" style={{ backgroundColor: notesDataItem.backgroundColor || '#fff' }}>
           <h5 className="card-title text-center">{notesDataItem.title}</h5>
           <p className="card-text">
-            <div className="display-linebreak">{notesDataItem.description}</div>
+            <span className="display-linebreak">{notesDataItem.description}</span>
           </p>
         </div>
         <div className="m-2">

@@ -1,20 +1,8 @@
-import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import { useQuery } from '@apollo/client';
 import { Notes } from '../models/notes';
+import { GET_NOTES_LIST } from '../operations/queries/getNotesList';
+import { getNotesList } from '../operations/queries/__generated__/getNotesList';
 import { NotesItem } from './NotesItem';
-import { getNotesList } from './__generated__/getNotesList';
-
-export const GET_NOTES_LIST = gql`
-  query getNotesList {
-    notesList {
-      id
-      title
-      description
-      backgroundColor
-      isArchived
-    }
-  }
-`;
 
 export const NotesList = () => {
   const { data, error, loading } = useQuery<getNotesList>(GET_NOTES_LIST);
