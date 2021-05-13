@@ -14,7 +14,7 @@ export const useDeleteNotes = () => {
     DELETE_NOTES_MUTATION,
     {
       update: (cache, { data }) => {
-        if (!data?.deleteNotes) {
+        if (data?.deleteNotes !== '') {
           const existingNotes: getNotesList = cache.readQuery({ query: GET_NOTES_LIST }) ?? { notesList: [] };
           const updatedNotesList = existingNotes.notesList.filter((t) => t.id !== data?.deleteNotes);
           cache.writeQuery({
