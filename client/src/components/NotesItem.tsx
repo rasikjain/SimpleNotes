@@ -1,33 +1,13 @@
-import { gql, useMutation } from '@apollo/client';
 import { Notes } from '../models/notes';
-import { GET_NOTES_LIST } from '../operations/queries/getNotesList';
-import { getNotesList } from '../operations/queries/__generated__/getNotesList';
-import { deleteNotesMutationVariables } from './__generated__/deleteNotesMutation';
+import { useDeleteNotes } from '../operations/mutations/deleteNotes';
 
 export const NotesItem = (notesDataItem: Notes) => {
-  const DELETE_NOTES_MUTATION = gql`
-    mutation deleteNotesMutation($id: String!) {
-      deleteNotes(id: $id)
-    }
-  `;
-
-  const [deleteNotes, { data, loading, error }] =
-    useMutation<boolean, deleteNotesMutationVariables>(DELETE_NOTES_MUTATION);
+  //DELETE NOTES MUTATE
+  const { deleteNotesMutate } = useDeleteNotes(notesDataItem.id);
 
   const handleDelete = (id: string) => {
-    deleteNotes({
+    deleteNotesMutate({
       variables: { id: id },
-      optimisticResponse: true,
-      update: (cache) => {
-        const existingNotes: getNotesList = cache.readQuery({ query: GET_NOTES_LIST }) ?? { notesList: [] };
-        const updatedNotesList = existingNotes.notesList.filter((t) => t.id !== id);
-        cache.writeQuery({
-          query: GET_NOTES_LIST,
-          data: {
-            notesList: updatedNotesList,
-          },
-        });
-      },
     });
   };
 
