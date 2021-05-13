@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { CirclePicker } from 'react-color';
-import { gql, useMutation } from '@apollo/client';
-import { createNotesMutationVariables, createNotesMutation_createNotes } from './__generated__/createNotesMutation';
-import { getNotesList } from '../operations/queries/__generated__/getNotesList';
-import { GET_NOTES_LIST } from '../operations/queries/getNotesList';
+import { useCreateNotes } from '../operations/mutations/createNotes';
 
 export interface NotesFormModalProps {
   showModal: boolean;
@@ -17,6 +14,9 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
   const [description, setDescription] = useState<string>('');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
 
+  //CREATE NOTES MUTATE
+  const { createNotesMutate } = useCreateNotes();
+
   const closeModal = () => {
     setTitle('');
     setDescription('');
@@ -24,51 +24,10 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
     props.closeModal();
   };
 
-  const CREATE_NOTES_MUTATION = gql`
-    mutation createNotesMutation($newNotesInput: NotesInput!) {
-      createNotes(newNotesInput: $newNotesInput) {
-        id
-        title
-        description
-        backgroundColor
-        isArchived
-      }
-    }
-  `;
-
-  const [createNotes, { data, loading, error }] = useMutation<
-    createNotesMutation_createNotes,
-    createNotesMutationVariables
-  >(CREATE_NOTES_MUTATION, {
-    update(cache, { data }) {
-      const existingNotes: getNotesList = cache.readQuery({ query: GET_NOTES_LIST }) ?? { notesList: [] };
-
-      if (data) {
-        const newNotesList = [
-          ...existingNotes.notesList,
-          {
-            id: data?.id,
-            title: data?.title,
-            description: data?.description,
-            backgroundColor: data?.backgroundColor,
-            isArchived: data?.isArchived,
-          },
-        ];
-
-        cache.writeQuery({
-          query: GET_NOTES_LIST,
-          data: {
-            notesList: newNotesList,
-          },
-        });
-      }
-    },
-  });
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    createNotes({
+    createNotesMutate({
       variables: {
         newNotesInput: { description: description, title: title, backgroundColor: backgroundColor, isArchived: false },
       },
