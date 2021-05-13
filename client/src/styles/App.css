@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -35,4 +35,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.display-linebreak {
+  white-space: pre-line;
 }
