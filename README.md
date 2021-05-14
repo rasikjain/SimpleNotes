@@ -1,5 +1,7 @@
 # SimpleNotes
 
+This App is built using React, TypeScript, Node.js, GraphQL, Apollo-server-express, MongoDB, Typegoose, Mongoose
+
 ## Steps to Run the Application
 
 Fork the code from **[Simple Notes](https://github.com/rasikjain/SimpleNotes)** repo to your workstation.
