@@ -1,6 +1,6 @@
 # SimpleNotes
 
-This App is built using React, TypeScript, Node.js, GraphQL, Apollo-server-express, MongoDB, Typegoose, Mongoose
+This App is built using React, TypeScript, Node.js, GraphQL, Apollo-server-express, Apollo Codegen, TypeGraphQL, MongoDB, Typegoose, Mongoose
 
 ## Steps to Run the Application
 
