@@ -2,36 +2,67 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { CirclePicker } from 'react-color';
 import { useCreateNotes } from '../operations/mutations/createNotes';
+import { useEditNotes } from '../operations/mutations/editNotes';
 
 export interface NotesFormModalProps {
   showModal: boolean;
   closeModal: () => void;
+  notesID?: string;
+  title?: string;
+  description?: string;
+  backgroundColor?: string;
 }
 
 export const NotesFormModal = (props: NotesFormModalProps) => {
   //State
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [backgroundColor, setBackgroundColor] = useState<string>('');
+  const [notesID, setNotesID] = useState<string>(props.notesID || '');
+  const [title, setTitle] = useState<string>(props.title || '');
+  const [description, setDescription] = useState<string>(props.description || '');
+  const [backgroundColor, setBackgroundColor] = useState<string>(props.backgroundColor || '');
 
   //CREATE NOTES MUTATE
   const { createNotesMutate } = useCreateNotes();
+  const { editNotesMutate } = useEditNotes();
 
   const closeModal = () => {
-    setTitle('');
-    setDescription('');
-    setBackgroundColor('');
+    if (!notesID) {
+      setNotesID('');
+      setTitle('');
+      setDescription('');
+      setBackgroundColor('');
+    }
     props.closeModal();
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    createNotesMutate({
-      variables: {
-        newNotesInput: { description: description, title: title, backgroundColor: backgroundColor, isArchived: false },
-      },
-    });
+    if (!notesID) {
+      createNotesMutate({
+        variables: {
+          newNotesInput: {
+            description: description,
+            title: title,
+            backgroundColor: backgroundColor,
+            isArchived: false,
+          },
+        },
+      });
+    }
+
+    if (notesID) {
+      editNotesMutate({
+        variables: {
+          editNotesInput: {
+            id: notesID,
+            description: description,
+            title: title,
+            backgroundColor: backgroundColor,
+            isArchived: false,
+          },
+        },
+      });
+    }
 
     closeModal();
   };
@@ -59,7 +90,7 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
             <label htmlFor="description">Description</label>
             <textarea
               className="form-control"
-              rows={8}
+              rows={6}
               id="description"
               placeholder="Enter text here..."
               onChange={(e) => setDescription(e.target.value)}
