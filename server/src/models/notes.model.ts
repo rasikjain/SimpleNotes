@@ -22,6 +22,14 @@ export class Notes {
   @Field({ nullable: true })
   @Property({ type: Boolean, required: false })
   isArchived: boolean;
+
+  @Field()
+  @Property({ required: true, default: Date.now })
+  createdAt: Date;
+
+  @Field()
+  @Property({ required: true, default: Date.now })
+  updatedAt: Date;
 }
 
 export const NotesModel = getModelForClass(Notes);

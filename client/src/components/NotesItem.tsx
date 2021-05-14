@@ -1,5 +1,6 @@
 import { Notes } from '../models/notes';
 import { useDeleteNotes } from '../operations/mutations/deleteNotes';
+import dateformat from 'dateformat';
 
 export const NotesItem = (notesDataItem: Notes) => {
   //DELETE NOTES MUTATE
@@ -16,21 +17,26 @@ export const NotesItem = (notesDataItem: Notes) => {
       <div className="card" style={{ width: '30rem' }}>
         <div className="card-body" style={{ backgroundColor: notesDataItem.backgroundColor || '#fff' }}>
           <h5 className="card-title text-center">{notesDataItem.title}</h5>
-          <p className="card-text">
+          <p className="card-text text-start">
             <span className="display-linebreak">{notesDataItem.description}</span>
           </p>
         </div>
-        <div className="m-2">
-          <button
-            type="button"
-            className="btn btn-outline-danger btn-sm mx-2"
-            onClick={() => handleDelete(notesDataItem.id)}
-          >
-            Delete
-          </button>
-          <button type="button" className="btn btn-outline-primary btn-sm mx-2" onClick={() => {}}>
-            Edit
-          </button>
+        <div className="m-2 row">
+          <div className="col-md-6 text-start">
+            <small className="text-muted">Edited: {dateformat(notesDataItem.updatedAt, 'mmm dd, yyyy')}</small>
+          </div>
+          <div className="card-text col-md-6 text-end">
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-sm mx-2"
+              onClick={() => handleDelete(notesDataItem.id)}
+            >
+              Delete
+            </button>
+            <button type="button" className="btn btn-outline-primary btn-sm mx-2" onClick={() => {}}>
+              Edit
+            </button>
+          </div>
         </div>
       </div>
     </div>

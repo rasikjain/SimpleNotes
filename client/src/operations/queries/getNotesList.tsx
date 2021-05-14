@@ -8,6 +8,8 @@ export const GET_NOTES_LIST = gql`
       description
       backgroundColor
       isArchived
+      createdAt
+      updatedAt
     }
   }
 `;

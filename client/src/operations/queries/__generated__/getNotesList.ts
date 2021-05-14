@@ -14,6 +14,8 @@ export interface getNotesList_notesList {
   description: string;
   backgroundColor: string | null;
   isArchived: boolean | null;
+  createdAt: any;
+  updatedAt: any;
 }
 
 export interface getNotesList {
