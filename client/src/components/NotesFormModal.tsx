@@ -128,7 +128,7 @@ export const NotesFormModal = (props: NotesFormModalProps) => {
             Close
           </Button>
           <Button variant="primary" type="submit" onSubmit={handleSubmit}>
-            Create
+            {notesID ? 'Edit' : 'Create'}
           </Button>
         </Modal.Footer>
       </form>
